@@ -2,11 +2,19 @@
    width: 32px;
    height: 32px;
    
-   position: relative;
-   /* top: -40px;
-   left: -40px; */
+   background-image: url(./../../../images/close-button.svg);
+   background-repeat: no-repeat;
+   background-color: transparent;
+   background-size: cover;
+   position: absolute;
+   border: none;
+   outline: none;
+   top: -40px;
+   right: -40px;
 
    transition: 0.3s;
+
+   padding: 0;
 }
 
 .popup__close-button:hover {
