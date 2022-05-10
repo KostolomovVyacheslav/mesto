@@ -8,3 +8,10 @@
 
    padding-left: 30px;
 }
+
+@media screen and (max-width: 768px) {
+   .profile__info {
+      padding: 26px 0 36px 0;
+      gap: 14px 10px;
+   }
+}

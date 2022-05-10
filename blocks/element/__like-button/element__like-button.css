@@ -4,7 +4,7 @@
 
    background-image: url(./../../../images/like-disabled.svg);
    background-repeat: no-repeat;
-   background-color: #ffffff;
+   background-color: transparent;
    border: none;
 
    transition: 0.3s;
