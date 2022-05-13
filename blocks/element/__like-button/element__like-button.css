@@ -2,6 +2,7 @@
    width: 22px;
    height: 20px;
 
+   background-image: url(./../../../images/like-disabled.svg);
    background-repeat: no-repeat;
    background-color: transparent;
    border: none;
@@ -14,4 +15,9 @@
 .element__like-button:hover {
    cursor: pointer;
    opacity: 0.5;
+}
+
+.element__like-button:active {
+   background-image: url(./../../../images/like-active.svg);
+   opacity: 1;
 }
