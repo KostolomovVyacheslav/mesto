@@ -1,7 +1,7 @@
 .profile__info {
    display: grid;
 
-   grid-template-columns: auto 1fr;
+   grid-template-columns: repeat(2, max-content);
    grid-template-rows: 1fr auto;
 
    gap: 16px 18px;

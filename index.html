@@ -22,70 +22,16 @@
          </section>
          <section class="elements">
             <ul class="elements__list">
-               <li class="element">
-                  <img src="./images/kirill-pershin-1088404-unsplash.png" class="element__image" alt="Карачаевск">
-                  <div class="element__description">
-                     <h2 class="element__title">Карачаевск</h2>
-                     <div class="element__like">
-                        <button type="button" class="element__like-button"></button>
-                     </div>
-                  </div>
-               </li>
-               <li class="element">
-                  <img src="./images/nikolay-vorobyev-bMo6fBHRiYQ-unsplash.jpg" class="element__image" alt="Крым">
-                  <div class="element__description">
-                     <h2 class="element__title">Крым</h2>
-                     <div class="element__like">
-                        <button type="button" class="element__like-button"></button>
-                     </div>
-                  </div>
-               </li>
-               <li class="element">
-                  <img src="./images/kirill-pershin-1556355-unsplash.png" class="element__image" alt="Домбай">
-                  <div class="element__description">
-                     <h2 class="element__title">Домбай</h2>
-                     <div class="element__like">
-                        <button type="button" class="element__like-button"></button>
-                     </div>
-                  </div>
-               </li>
-               <li class="element">
-                  <img src="./images/ars-gadz-VTKx3ImNY1M-unsplash.jpg" class="element__image" alt="Северная Осетия">
-                  <div class="element__description">
-                     <h2 class="element__title">Северная Осетия</h2>
-                     <div class="element__like">
-                        <button type="button" class="element__like-button"></button>
-                     </div>
-                  </div>
-               </li>
-               <li class="element">
-                  <img src="./images/kirill-pershin-1404681-unsplash.png" class="element__image" alt="Гора Эльбрус">
-                  <div class="element__description">
-                     <h2 class="element__title">Гора Эльбрус</h2>
-                     <div class="element__like">
-                        <button type="button" class="element__like-button"></button>
-                     </div>
-                  </div>
-               </li>
-               <li class="element">
-                  <img src="./images/vladimir-fedotov-0IYLhbSq6iw-unsplash.jpg" class="element__image" alt="Онежское озеро">
-                  <div class="element__description">
-                     <h2 class="element__title">Онежское озеро</h2>
-                     <div class="element__like">
-                        <button type="button" class="element__like-button"></button>
-                     </div>
-                  </div>
-               </li>
             </ul>
          </section>
       </main>
       <footer class="footer">
          <p class="footer__copyright">&copy;2022 Mesto Russia</p>
       </footer>
-      <div class="popup">
+      <div id="#edit-popup" class="popup">
          <div class="popup__container">
             <button type="button" class="popup__close-button"></button>
-            <form class="popup__form">
+            <form id="#edit-form" class="popup__form">
                <h2 class="popup__title">Редактировать профиль</h2>
                <input class="popup__input popup__input_name" type="text" placeholder="Как Вас зовут?" minlength="1" maxlength="80">
                <input class="popup__input popup__input_job" type="text" placeholder="Чем Вы занимаетесь?" minlength="1" maxlength="80">
@@ -93,6 +39,38 @@
             </form>
          </div>
       </div>
+      <div id="#add-popup" class="popup">
+         <div class="popup__container">
+            <button type="button" class="popup__close-button"></button>
+            <form id="#add-img-form" class="popup__form">
+               <h2 class="popup__title">Новое место</h2>
+               <input class="popup__input popup__input_img-name" type="text" placeholder="Название" minlength="1" maxlength="80">
+               <input class="popup__input popup__input_img-link" type="text" placeholder="Ссылка на картинку" minlength="1" maxlength="80">
+               <button type="submit" class="popup__save-button">Сохранить</button>
+            </form>
+         </div>
+      </div>
+      <div id="#photo-popup" class="popup">
+         <div class="popup__photo-container">
+            <button type="button" class="popup__close-button"></button>
+            <figure class="popup__figure">
+               <img src="./images/vladimir-fedotov-0IYLhbSq6iw-unsplash.jpg" class="popup__image" alt="">
+               <figcaption class="popup__caption">Байкал</figcaption>
+            </figure>
+         </div>
+      </div>
+      <template class="element-template">
+         <li class="element">
+            <button type="button" class="element__delete-button"></button>
+            <img src="" class="element__image" alt="">
+            <div class="element__description">
+               <h2 class="element__title"></h2>
+               <div class="element__like">
+                  <button type="button" class="element__like-button"></button>
+               </div>
+            </div>
+         </li>
+      </template>
       <script src="./scripts/index.js"></script>
    </body>
 </html>
