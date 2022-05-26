@@ -53,7 +53,7 @@ function formSubmitHandler(evt) {
    profileName.textContent = nameInput.value;
    profileDescription.textContent = jobInput.value;
    editPopup.classList.remove('popup_opened');
-}
+};
 
 formElement.addEventListener('submit', formSubmitHandler); 
 
@@ -76,7 +76,7 @@ function removeListItem(evt) {
    const buttonElement = evt.target;
    const listItemElement = buttonElement.closest('.element');
    listItemElement.remove();
-}
+};
 
 
 // Открытие попапа с фото
@@ -103,7 +103,7 @@ function renderItem(text) {
    
    subscribeToEvents(listElement);
    cardsList.prepend(listElement);
-}
+};
 
 
 // События на лайк, удаление и открытие фото-попапа
@@ -119,7 +119,7 @@ function subscribeToEvents(listElement) {
 
 // Открытие попапов: редактирования профиля и добавления нового элемента
 function openPopup(popupElement) {
-   popupElement.classList.add('popup_opened')
+   popupElement.classList.add('popup_opened');
 };
 
 cardAddButton.addEventListener('click', function() {
@@ -159,7 +159,7 @@ function prepareCard(evt) {
    elementLinkInput.value = null;
 
    addPopup.classList.remove('popup_opened');
-}
+};
 
 
 renderList(initialCards);
