@@ -120,10 +120,18 @@ profileEditButton.addEventListener('click', function() {
 });
 
 
-// Настраиваем состояние кнопки у попапа редактирования профиля, перед его открытием
+// Настраиваем состояние кнопки у попапа редактирования профиля и прячем ошибки, перед его открытием
 const toggleButton = (popupElement) => {
    if (popupElement === editPopup) {
       const popupSaveButton = popupElement.querySelector('.popup__save-button');
+      const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
+
+      inputList.forEach((inputElement) => {
+         const errorElement = inputElement.nextElementSibling;
+         
+         inputElement.classList.remove('popup__input_type_error');
+         errorElement.classList.remove('popup__input-error_visible');
+      });
       popupSaveButton.removeAttribute('disabled', true);
       popupSaveButton.classList.remove('popup__save-button_disabled');
       openPopup(popupElement);
