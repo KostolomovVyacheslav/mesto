@@ -10,7 +10,10 @@ const addPopup = document.getElementById('#add-popup');
 const photoPopup = document.getElementById('#photo-popup');
 
 const addCardForm = document.getElementById('#add-img-form');
-const formElement = document.getElementById('#edit-form');
+const formEditProfile = document.getElementById('#edit-form');
+
+const popupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption');
 
 const cardsList = document.querySelector('.elements__list');
 const elementNameInput = document.querySelector('.popup__input_img-name');
@@ -23,7 +26,7 @@ const jobInput = document.querySelector('.popup__input_job');
 
 
 // Редактируем профиль
-function formSubmitHandler(evt) {
+function submitEditProfileForm(evt) {
    evt.preventDefault();
 
    profileName.textContent = nameInput.value;
@@ -32,7 +35,7 @@ function formSubmitHandler(evt) {
    closePopup(editPopup);
 };
 
-formElement.addEventListener('submit', formSubmitHandler); 
+formEditProfile.addEventListener('submit', submitEditProfileForm); 
 
 
 // Картинки "ИЗ КОРОБКИ"
@@ -58,8 +61,6 @@ function removeListItem(evt) {
 
 // Открытие попапа с фото
 function openPhotoPopup(evt) {
-   const popupImage = document.querySelector('.popup__image');
-   const popupCaption = document.querySelector('.popup__caption');
    const elementImage = evt.target.closest('.element__image');
    popupImage.src = elementImage.src;
    popupImage.alt = elementImage.alt;
@@ -98,20 +99,15 @@ function subscribeToEvents(listElement) {
 };
 
 
-// Открытие попапов, предвалидация попапов: редактирования профиля и добавления нового элемента
+// Функция для открытия попапов
 function openPopup(popupElement) {
-   if (popupElement === photoPopup) {
-      popupElement.classList.add('popup_opened');
-   } else {
-      const formElement = popupElement.querySelector(popupConfig.formSelector);
-      const inputList = Array.from(formElement.querySelectorAll(popupConfig.inputSelector));
-      const buttonElement = formElement.querySelector(popupConfig.submitButtonSelector);
-      validatePopup(popupConfig, formElement, inputList, buttonElement);
-      
-      popupElement.classList.add('popup_opened');
-   };
+   document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+         closePopup(popupElement);
+      };
+   });
+   popupElement.classList.add('popup_opened');
 };
-
 
 cardAddButton.addEventListener('click', function() {
    openPopup(addPopup);
@@ -120,11 +116,23 @@ cardAddButton.addEventListener('click', function() {
 profileEditButton.addEventListener('click', function() {
    nameInput.value = profileName.textContent;
    jobInput.value = profileDescription.textContent;
-   openPopup(editPopup);
+   toggleButton(editPopup);
 });
+
+
+// Настраиваем состояние кнопки у попапа редактирования профиля, перед его открытием
+const toggleButton = (popupElement) => {
+   if (popupElement === editPopup) {
+      const popupSaveButton = popupElement.querySelector('.popup__save-button');
+      popupSaveButton.removeAttribute('disabled', true);
+      popupSaveButton.classList.remove('popup__save-button_disabled');
+      openPopup(popupElement);
+   };
+};
 
 // Функция для закрытия попапов
 function closePopup(popupElement) {
+   document.removeEventListener('keydown', closePopup);
    popupElement.classList.remove('popup_opened');
 };
 
@@ -141,29 +149,23 @@ allPopups.forEach((popup) => {
    popup.addEventListener('click', closePopupByClick);
 });
 
-// Закрываем открытый попап клавишей "Escape"
-document.addEventListener('keydown', function(event) {
-   const popupOpened = document.querySelector('.popup_opened');
-   if (event.key === 'Escape') {
-      if (popupOpened !== null) {
-         closePopup(popupOpened);
-      };
-   };
-});
 
-
-// Собираем новый элемент
+// Собираем новый элемент, отключаем кнопку у формы
 function prepareCard(evt) {
    evt.preventDefault();
    
-   let name = elementNameInput.value;
-   let link = elementLinkInput.value;
-   let newCard = {name, link};
+   const formSaveButton = evt.target.querySelector('.popup__save-button');
+   const name = elementNameInput.value;
+   const link = elementLinkInput.value;
+   const newCard = {name, link};
    
    renderItem(newCard);
 
    elementNameInput.value = null;
    elementLinkInput.value = null;
+   
+   formSaveButton.classList.add('popup__save-button_disabled');
+   formSaveButton.setAttribute('disabled', true);
 
    closePopup(addPopup);
 };
@@ -172,13 +174,3 @@ function prepareCard(evt) {
 renderList(initialCards);
 
 addCardForm.addEventListener("submit", prepareCard);
-
-// Объект настроек для предвалидации попапа при открытии
-popupConfig = {
-   formSelector: '.popup__form',
-   inputSelector: '.popup__input',
-   submitButtonSelector: '.popup__save-button',
-   inactiveButtonClass: 'popup__save-button_disabled',
-   inputErrorClass: 'popup__input_type_error',
-   errorClass: 'popup__input-error_visible'
-};

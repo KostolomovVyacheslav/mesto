@@ -1,17 +1,3 @@
-// Предвалидируем попап при открытии
-const validatePopup = (popupConfig, formElement, inputList, buttonElement) => {
-   inputList.forEach((inputElement) => {
-      if (inputElement.classList.contains(popupConfig.inputErrorclass)) {
-         showError(popupConfig, inputElement, inputElement.validationMessage);
-         toggleButtonState(popupConfig, inputList, buttonElement);
-      } else {
-         hideError(popupConfig, inputElement);
-         toggleButtonState(popupConfig, inputList, buttonElement);
-      };
-   });
-};
-
-
 // Показываем сообщение об ошибке
 const showError = (config, inputElement, errorMessage) => {
    const errorElement = inputElement.nextElementSibling;
