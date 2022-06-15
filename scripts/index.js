@@ -116,12 +116,12 @@ cardAddButton.addEventListener('click', function() {
 profileEditButton.addEventListener('click', function() {
    nameInput.value = profileName.textContent;
    jobInput.value = profileDescription.textContent;
-   toggleButton(editPopup);
+   preparePopup(editPopup);
 });
 
 
 // Настраиваем состояние кнопки у попапа редактирования профиля и прячем ошибки, перед его открытием
-const toggleButton = (popupElement) => {
+const preparePopup = (popupElement) => {
    if (popupElement === editPopup) {
       const popupSaveButton = popupElement.querySelector('.popup__save-button');
       const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
