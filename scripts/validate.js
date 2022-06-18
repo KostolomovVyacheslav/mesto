@@ -1,3 +1,23 @@
+const resetValidationErrors = (popupElement) => {
+   if (popupElement === editPopup) {
+         const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
+         
+         inputList.forEach((inputElement) => {
+         const errorElement = inputElement.nextElementSibling;
+         errorElement.textContent = '';
+   
+         inputElement.classList.remove('popup__input_type_error');
+         errorElement.classList.remove('popup__input-type_visible');
+      });
+   };
+};
+
+const disableSubmitButton = (buttonElement) => {
+   buttonElement.setAttribute('disabled', true);
+   buttonElement.classList.add('popup__save-button_disabled');
+};
+
+
 // Показываем сообщение об ошибке
 const showError = (config, inputElement, errorMessage) => {
    const errorElement = inputElement.nextElementSibling;
@@ -32,7 +52,7 @@ const setEventListeners = (config, formElement, inputElement) => {
    const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
    toggleButtonState(config, inputList, buttonElement);
-
+   
    inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function (evt) {
          checkInputValidity(config, inputElement);
@@ -76,11 +96,11 @@ const enableValidation = (config) => {
 };
 
 
-enableValidation({
+const config = {
    formSelector: '.popup__form',
    inputSelector: '.popup__input',
    submitButtonSelector: '.popup__save-button',
    inactiveButtonClass: 'popup__save-button_disabled',
    inputErrorClass: 'popup__input_type_error',
    errorClass: 'popup__input-error_visible'
-});
+};
