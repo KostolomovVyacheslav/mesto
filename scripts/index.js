@@ -127,44 +127,6 @@ profileEditButton.addEventListener('click', function() {
 });
 
 
-// Настраиваем состояние кнопки у попапа редактирования профиля и прячем ошибки, перед его открытием
-// const preparePopup = (popupElement) => {
-//    if (popupElement === editPopup) {
-//       const popupSaveButton = popupElement.querySelector('.popup__save-button');
-//       const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
-
-//       inputList.forEach((inputElement) => {
-//          const errorElement = inputElement.nextElementSibling;
-         
-//          inputElement.classList.remove('popup__input_type_error');
-//          errorElement.classList.remove('popup__input-error_visible');
-//       });
-//       popupSaveButton.removeAttribute('disabled', true);
-//       popupSaveButton.classList.remove('popup__save-button_disabled');
-//       openPopup(popupElement);
-//    };
-// };
-
-// const resetValidationErrors = (popupElement) => {
-//    if (popupElement === editPopup) {
-//          const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
-      
-//          inputList.forEach((inputElement) => {
-//          const errorElement = inputElement.nextElementSibling;
-//          errorElement.textContent = '';
-
-//          inputElement.classList.remove('popup__input_type_error');
-//          errorElement.classList.remove('popup__input-error_visible');
-//       });
-//    };
-// };
-
-// const disableSubmitButton = (popupElement) => {
-//    const popupSaveButton = popupElement.querySelector('.popup__save-button');
-//    popupSaveButton.setAttribute('disabled', true);
-//    popupSaveButton.classList.add('popup__save-button_disabled');
-// }
-
 // Функция для закрытия попапов
 function closePopup(popupElement) {
    document.removeEventListener('keydown', closeByEsc);
@@ -209,3 +171,44 @@ function prepareCard(evt) {
 renderList(initialCards);
 
 addCardForm.addEventListener("submit", prepareCard);
+
+
+
+
+// Настраиваем состояние кнопки у попапа редактирования профиля и прячем ошибки, перед его открытием
+// const preparePopup = (popupElement) => {
+//    if (popupElement === editPopup) {
+//       const popupSaveButton = popupElement.querySelector('.popup__save-button');
+//       const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
+
+//       inputList.forEach((inputElement) => {
+//          const errorElement = inputElement.nextElementSibling;
+         
+//          inputElement.classList.remove('popup__input_type_error');
+//          errorElement.classList.remove('popup__input-error_visible');
+//       });
+//       popupSaveButton.removeAttribute('disabled', true);
+//       popupSaveButton.classList.remove('popup__save-button_disabled');
+//       openPopup(popupElement);
+//    };
+// };
+
+// const resetValidationErrors = (popupElement) => {
+//    if (popupElement === editPopup) {
+//          const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
+      
+//          inputList.forEach((inputElement) => {
+//          const errorElement = inputElement.nextElementSibling;
+//          errorElement.textContent = '';
+
+//          inputElement.classList.remove('popup__input_type_error');
+//          errorElement.classList.remove('popup__input-error_visible');
+//       });
+//    };
+// };
+
+// const disableSubmitButton = (popupElement) => {
+//    const popupSaveButton = popupElement.querySelector('.popup__save-button');
+//    popupSaveButton.setAttribute('disabled', true);
+//    popupSaveButton.classList.add('popup__save-button_disabled');
+// }
