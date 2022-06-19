@@ -1,20 +1,32 @@
+const config = {
+   formSelector: '.popup__form',
+   inputSelector: '.popup__input',
+   submitButtonSelector: '.popup__save-button',
+   inactiveButtonClass: 'popup__save-button_disabled',
+   inputErrorClass: 'popup__input_type_error',
+   errorClass: 'popup__input-error_visible'
+};
+
+
+// Сбрасываем ошибки у попапа редактирования профиля перед открытием
 const resetValidationErrors = (popupElement) => {
    if (popupElement === editPopup) {
-         const inputList = Array.from(popupElement.querySelectorAll('.popup__input'));
+      const inputList = Array.from(popupElement.querySelectorAll(config.inputSelector));
          
-         inputList.forEach((inputElement) => {
+      inputList.forEach((inputElement) => {
          const errorElement = inputElement.nextElementSibling;
          errorElement.textContent = '';
    
-         inputElement.classList.remove('popup__input_type_error');
-         errorElement.classList.remove('popup__input-type_visible');
+         inputElement.classList.remove(config.inputErrorClass);
+         errorElement.classList.remove(config.errorClass);
       });
    };
 };
 
+// Отключаем кнопку у попапа редактирования профиля перед открытием
 const disableSubmitButton = (buttonElement) => {
    buttonElement.setAttribute('disabled', true);
-   buttonElement.classList.add('popup__save-button_disabled');
+   buttonElement.classList.add(config.inactiveButtonClass);
 };
 
 
@@ -95,12 +107,4 @@ const enableValidation = (config) => {
    });
 };
 
-
-const config = {
-   formSelector: '.popup__form',
-   inputSelector: '.popup__input',
-   submitButtonSelector: '.popup__save-button',
-   inactiveButtonClass: 'popup__save-button_disabled',
-   inputErrorClass: 'popup__input_type_error',
-   errorClass: 'popup__input-error_visible'
-};
+enableValidation(config);
