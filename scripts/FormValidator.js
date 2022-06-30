@@ -4,6 +4,8 @@ export class FormValidator {
    constructor(config, form) {
       this._config = config;
       this._form = form;
+      this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
+      this._buttonElement = this._form.querySelector(this._config.submitButtonSelector);
    };
 
    //  Сбрасываем стандартное поведение у формы, вызываем метод со слушателями
@@ -17,9 +19,9 @@ export class FormValidator {
 
    // Добавляем события всем полям ввода
    _setEventListeners() {
-      this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-      this._buttonElement = this._form.querySelector(this._config.submitButtonSelector);
-   
+
+      this._toggleButtonState();
+
       this._inputList.forEach((inputElement) => {
          inputElement.addEventListener('input', () => {
             this._checkInputValidity(inputElement);
@@ -47,8 +49,7 @@ export class FormValidator {
    // Управляем состоянием кнопки формы
    _toggleButtonState() {
       if (this._hasInvalidInput()) {
-         this._buttonElement.setAttribute('disabled', true)
-         this._buttonElement.classList.add(this._config.inactiveButtonClass);
+         this.disableSubmitButton();
       } else {
          this._buttonElement.removeAttribute('disabled', true)
          this._buttonElement.classList.remove(this._config.inactiveButtonClass);
@@ -72,25 +73,15 @@ export class FormValidator {
    };
 
    // Публичный метод для сброса ошибок у попапа редактирования профиля, перед открытием
-   resetValidationErrors(popupElement) {
-      if (popupElement === editPopup) {
-         const inputList = Array.from(popupElement.querySelectorAll(config.inputSelector));
-
-         inputList.forEach((inputElement) => {
-            const errorElement = inputElement.nextElementSibling;
-            errorElement.textContent = '';
-
-            inputElement.classList.remove(config.inputErrorClass);
-            errorElement.classList.remove(config.errorClass);
-         })
-      } else {
-         return;
-      };
+   resetValidationErrors() {
+      this._inputList.forEach((inputElement) => {
+         this._hideError(inputElement);
+      });
    };
 
    // Публичный метод для отключения кнопки у попапа редактирования профиля, перед открытием
-   disableSubmitButton(buttonElement) {
-      buttonElement.setAttribute('disabled', true);
-      buttonElement.classList.add(config.inactiveButtonClass);
+   disableSubmitButton() {
+      this._buttonElement.setAttribute('disabled', true);
+      this._buttonElement.classList.add(config.inactiveButtonClass);
    };
 };

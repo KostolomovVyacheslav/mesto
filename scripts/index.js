@@ -1,4 +1,5 @@
-import { Card } from './Card.js'
+import { initialCards } from './initialCards.js';
+import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
 
 export const config = {
@@ -7,10 +8,9 @@ export const config = {
    submitButtonSelector: '.popup__save-button',
    inactiveButtonClass: 'popup__save-button_disabled',
    inputErrorClass: 'popup__input_type_error',
+   errorElement: 'popup__input-error',
    errorClass: 'popup__input-error_visible'
 };
-
-const templateElement = document.querySelector('.element-template').content;
 
 const allPopups = document.querySelectorAll('.popup');
 export const editPopup = document.getElementById('#edit-popup'); 
@@ -57,7 +57,7 @@ const closeByEsc = (evt) => {
 
 
 // Функция для открытия попапов
-const openPopup = (popupElement) => {
+export const openPopup = (popupElement) => {
    popupElement.classList.add('popup_opened');
    document.addEventListener('keydown', closeByEsc);
 };
@@ -104,7 +104,6 @@ allPopups.forEach((popup) => {
 const prepareCard = (evt) => {
    evt.preventDefault();
    
-   const formSaveButton = evt.target.querySelector('.popup__save-button');
    const name = elementNameInput.value;
    const link = elementLinkInput.value;
    const newCard = {name, link};
@@ -114,7 +113,7 @@ const prepareCard = (evt) => {
    elementNameInput.value = null;
    elementLinkInput.value = null;
    
-   addForm.disableSubmitButton(formSaveButton);
+   addForm.disableSubmitButton();
 
    closePopup(addPopup);
 };
@@ -130,15 +129,17 @@ const renderList = (data) => {
    });
 };
 
-
-// Создаём новый элемент
+// Создаём новый экземпляр класса
 const  renderItem = (item) => {
-   const card = new Card(item, templateElement)
+   const card = new Card(item, '.element-template');
    
-   const cardElement = card.generateCard();
-
-   cardsList.prepend(cardElement);
+   return addNewItem(card.generateCard());
 };
+
+// Добавляем новую карточку в список
+const addNewItem = (item) => {
+   cardsList.prepend(item);
+}
 
 renderList(initialCards);
 

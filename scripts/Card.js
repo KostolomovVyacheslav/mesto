@@ -1,11 +1,15 @@
+import { openPopup } from './index.js';
+
 const popupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption');
 const photoPopup = document.getElementById('#photo-popup');
 
 export class Card {
-   constructor(data) {
+   constructor(data, templateElement) {
       this._name = data.name;
       this._link = data.link;
+
+      this._templateElement = templateElement;
 
       this._element = this._getTemplate();
       this._elementImage = this._element.querySelector('.element__image');
@@ -16,7 +20,7 @@ export class Card {
    // Метод с шаблоном разметки, возвращающий клонированный элемент
    _getTemplate() {
       const cardElement = document
-         .querySelector('.element-template')
+         .querySelector(this._templateElement)
          .content
          .querySelector('.element')
          .cloneNode(true);
@@ -39,63 +43,27 @@ export class Card {
       });
    };
 
-   // Закрытие на оверлей, Escape, добавление и удаление слушателей Escape
+
+   // Открываем попап с изображением, добавляем слушателей
    _handleOpenCard() {
       popupImage.src = this._link;
       popupImage.alt = this._name;
       popupCaption.textContent = this._name;
    
-      this._openPhotoPopup();
-
-      document.addEventListener('keydown', (evt) => {
-         this._closePhotoPopupByEscape(evt);
-      });
-      photoPopup.addEventListener('click', (evt) => {
-         this._closeByClick(evt);
-      });
+      openPopup(photoPopup);
    };
 
-   // Закрытие фото-попапа нажатием на клавишу "Escape"
-   _closePhotoPopupByEscape(evt) {
-      if (evt.key === 'Escape') {
-         this._closePhotoPopup();
-      };
-   };
-
-   // Закрытие фото-попапа кликом "мимо попапа"
-   _closeByClick(evt) {
-      if (evt.target === evt.currentTarget) {
-         this._closePhotoPopup();
-      };
-   };
-
-
-   _openPhotoPopup() {
-      photoPopup.classList.add('popup_opened');
-   };
-
-
-   _closePhotoPopup() {
-      document.removeEventListener('keydown', (evt) => {
-         this._closePhotoPopupByEscape(evt);
-      });
-      photoPopup.removeEventListener('click', (evt) => {
-         this._closeByClick(evt);
-      });
-
-
-      photoPopup.classList.remove('popup_opened');
-   };
-
-   
+  
    // Лайк элемента
    _handleLikeElement(evt) {
       evt.target.classList.toggle('element__like-button_active');
    };
 
+   
    // Удаление элемента
    _handleDeleteElement() {
       this._element.remove();
+      this._element = null;
    };
 
 
