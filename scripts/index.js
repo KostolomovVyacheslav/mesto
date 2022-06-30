@@ -13,7 +13,7 @@ export const config = {
 };
 
 const allPopups = document.querySelectorAll('.popup');
-export const editPopup = document.getElementById('#edit-popup'); 
+const editPopup = document.getElementById('#edit-popup');
 const addPopup = document.getElementById('#add-popup');
 
 const profileEditButton = document.querySelector('.profile__edit-button');

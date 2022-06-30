@@ -1,4 +1,4 @@
-import { config, editPopup } from './index.js';
+import { config } from './index.js';
 
 export class FormValidator {
    constructor(config, form) {
