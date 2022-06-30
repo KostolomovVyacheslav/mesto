@@ -107,7 +107,7 @@ const prepareCard = (evt) => {
    const link = elementLinkInput.value;
    const newCard = {name, link};
    
-   renderItem(newCard);
+   addNewItem(newCard);
 
    elementNameInput.value = null;
    elementLinkInput.value = null;
@@ -124,21 +124,21 @@ addCardForm.addEventListener("submit", prepareCard);
 // Картинки "ИЗ КОРОБКИ", добавляем в список массив изображении
 const renderList = (data) => {
    data.forEach((item) => {
-      renderItem(item);
+      addNewItem(item);
    });
-};
-
-// Создаём новый экземпляр класса
-const  renderItem = (item) => {
-   const card = new Card(item, '.element-template');
-   
-   return addNewItem(card.generateCard());
 };
 
 // Добавляем новую карточку в список
 const addNewItem = (item) => {
-   cardsList.prepend(item);
-}
+   cardsList.prepend(createItem(item));
+};
+
+// Создаём новый экземпляр класса
+const  createItem = (item) => {
+   const card = new Card(item, '.element-template');
+   
+   return card.generateCard();
+};
 
 renderList(initialCards);
 
