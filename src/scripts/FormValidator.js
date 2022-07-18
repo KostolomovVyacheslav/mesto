@@ -1,5 +1,3 @@
-import { config } from './index.js';
-
 export class FormValidator {
    constructor(config, form) {
       this._config = config;
@@ -82,6 +80,6 @@ export class FormValidator {
    // Публичный метод для отключения кнопки у попапа редактирования профиля, перед открытием
    disableSubmitButton() {
       this._buttonElement.setAttribute('disabled', true);
-      this._buttonElement.classList.add(config.inactiveButtonClass);
+      this._buttonElement.classList.add(this._config.inactiveButtonClass);
    };
 };
