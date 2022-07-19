@@ -1,5 +1,5 @@
-// import '../pages/index.css'; 
-// добавьте импорт главного файла стилей 
+import '../pages/index.css'; 
+
 import { initialItems } from './initialItems.js';
 import { Card } from './Card.js';
 import { FormValidator } from './FormValidator.js';
@@ -85,13 +85,9 @@ const addNewItem = (newCard) => {
    const newItem = new Card(newCard, '.element-template', handleCardClick);
    const newCardElement = newItem.generateCard();
 
-   console.log(newCardElement);
    return newCardElement;
 };
 
-
-// ЛОГИКА ДОБАВЛЕНИЯ НОВОГО ИЗОБРАЖЕНИЯ ПО КЛИКУ НА КНОПКУ СОХРАНИТЬ В ПОПАПЕ ДОБАВЛЕНИЯ НОВОГО ИЗОБРАЖЕНИЯ
-   // КНОПКА СОХРАНЕНИЯ 
 const addCardSubmitHandler = new PopupWithForm({
    popupSelector: addPopupId,
    handleFormSubmit: (newCard) => {
@@ -99,17 +95,13 @@ const addCardSubmitHandler = new PopupWithForm({
          name: elementNameInput.value,
          link: elementLinkInput.value
       };
-      console.log(elementNameInput.value, elementLinkInput.value, newCard);
       cardsList.prepend(addNewItem(newCard));
       addCardSubmitHandler.close();
       }
 });
 
-
-addFormSaveButton.addEventListener('click', (evt) => {
-   addCardSubmitHandler.setEventListeners(evt);
-});
-
+// Слушатель сабмит кнопки для попапа добавления новой карточки
+addFormSaveButton.addEventListener('click', addCardSubmitHandler.setEventListeners());
 
 
 
@@ -138,17 +130,13 @@ const profileSubmitHandler = new PopupWithForm({
          profileName: nameInput.value,
          profileDescription: jobInput.value
       };
-      console.log(data);
       userProfileInfo.setUserInfo(data);
       profileSubmitHandler.close();
    }
 });
 
-// Слушатель сабмит кнопки
-profileFormSaveButton.addEventListener('click', () => {
-   profileSubmitHandler.setEventListeners();
-});
-
+// Слушатель сабмит кнопки для попапа редактирования профиля
+profileFormSaveButton.addEventListener('click', profileSubmitHandler.setEventListeners());
 
 
 
