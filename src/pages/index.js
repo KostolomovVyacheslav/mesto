@@ -24,6 +24,7 @@ import {
 
 // Открываем попап добавления нового изображения
 cardAddButton.addEventListener('click', () => {
+   formValidators['img-form'].resetValidationErrors();
    addCardPopup.open();
 });   
 
@@ -66,6 +67,8 @@ const addCardPopup = new PopupWithForm({
       };
       cardList.renderer(newCard);
       addCardPopup.close();
+
+      formValidators['img-form'].disableSubmitButton();
       }
 });
 
@@ -80,6 +83,7 @@ const userProfileInfo = new UserInfo(profileSelectorsObj);
 // Открытие попапа редактирования профиля
 profileEditButton.addEventListener('click', () => {
    profilePopup.setInputValues(userProfileInfo.getUserInfo());
+   formValidators['edit-form'].resetValidationErrors();
    profilePopup.open();
 });
 
@@ -93,6 +97,8 @@ const profilePopup = new PopupWithForm({
       };
       userProfileInfo.setUserInfo(data);
       profilePopup.close();
+
+      formValidators['edit-form'].disableSubmitButton();
    }
 });
 
