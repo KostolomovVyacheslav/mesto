@@ -9,10 +9,12 @@ export class Card {
 
       this._element = this._getTemplate();
       this._elementImage = this._element.querySelector('.element__image');
+      this._elementTitle = this._element.querySelector('.element__title');
       this._likeButton = this._element.querySelector('.element__like-button');
       this._deleteButton = this._element.querySelector('.element__delete-button');
    }
 
+   
    _getTemplate() {
       const cardElement = document
          .querySelector(this._templateElement)
@@ -23,7 +25,7 @@ export class Card {
       return cardElement;
    }
 
-   
+
    _subscribeToEvents() {
       this._likeButton.addEventListener('click', this._handleLikeElement);
 
@@ -50,11 +52,11 @@ export class Card {
 
    // Собираем новую карточку
    generateCard() {
-      this._element.querySelector('.element__image').src = this._link;
-      this._element.querySelector('.element__title').textContent = this._name;
-      this._element.querySelector('.element__image').alt = this._name;
+      this._elementImage.src = this._link;
+      this._elementImage.alt = this._name;
+      this._elementTitle.textContent = this._name;
 
-      this._subscribeToEvents(this._element);
+      this._subscribeToEvents();
       
       return this._element;
    }

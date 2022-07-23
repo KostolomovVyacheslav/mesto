@@ -26,8 +26,10 @@ export class PopupWithForm extends Popup {
       });
    }
 
-   open() {
-      super.open();
+   setInputValues(data) {
+      this._inputList.forEach((input) => {
+         input.value = data[input.name];
+      });
    }
 
    close() {
