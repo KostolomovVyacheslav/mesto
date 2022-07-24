@@ -25,6 +25,7 @@ import {
 // Открываем попап добавления нового изображения
 cardAddButton.addEventListener('click', () => {
    formValidators['img-form'].resetValidationErrors();
+   formValidators['img-form'].disableSubmitButton();
    addCardPopup.open();
 });   
 
@@ -61,14 +62,12 @@ cardList.renderItems();
 const addCardPopup = new PopupWithForm({
    popupSelector: addPopupId,
    handleFormSubmit: (newCard) => {
-      newCard = {
-         name: addCardPopup._getInputValues().inputImgName,
-         link: addCardPopup._getInputValues().inputImgLink
+      const item = {
+         name: newCard.inputImgName,
+         link: newCard.inputImgLink
       };
-      cardList.renderer(newCard);
+      cardList.renderer(item);
       addCardPopup.close();
-
-      formValidators['img-form'].disableSubmitButton();
       }
 });
 
@@ -84,6 +83,7 @@ const userProfileInfo = new UserInfo(profileSelectorsObj);
 profileEditButton.addEventListener('click', () => {
    profilePopup.setInputValues(userProfileInfo.getUserInfo());
    formValidators['edit-form'].resetValidationErrors();
+   formValidators['edit-form'].disableSubmitButton();
    profilePopup.open();
 });
 
@@ -91,14 +91,12 @@ profileEditButton.addEventListener('click', () => {
 const profilePopup = new PopupWithForm({
    popupSelector: editPopupId,
    handleFormSubmit: (data) => {
-      data = {
-         inputUserName: profilePopup._getInputValues().inputUserName,
-         inputUserJob: profilePopup._getInputValues().inputUserJob
+      const userData = {
+         inputUserName: data.inputUserName,
+         inputUserJob: data.inputUserJob
       };
-      userProfileInfo.setUserInfo(data);
+      userProfileInfo.setUserInfo(userData);
       profilePopup.close();
-
-      formValidators['edit-form'].disableSubmitButton();
    }
 });
 
