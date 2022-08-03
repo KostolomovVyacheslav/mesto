@@ -6,7 +6,7 @@ export class FormValidator {
       this._buttonElement = this._form.querySelector(this._config.submitButtonSelector);
    }
 
-   //  Сбрасываем стандартное поведение у формы, вызываем метод со слушателями
+   // Сбрасываем стандартное поведение у формы, вызываем метод со слушателями
    enableValidation() {
       this._form.addEventListener('submit', (evt) => {
          evt.preventDefault();
