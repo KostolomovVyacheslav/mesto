@@ -1,4 +1,4 @@
-.profile__avatar_edit-button {
+.profile__avatar-edit-button {
    width: 100%;
    height: 100%;
 
@@ -11,7 +11,7 @@
    transition: 0.3s;
 }
 
-.profile__avatar_edit-button:hover {
+.profile__avatar-edit-button:hover {
    background-image: url(./../../../../images/avatar-edit-button.svg);
    background-color: rgba(0, 0, 0, 0.8);
    background-size: 26px;
