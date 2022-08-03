@@ -18,7 +18,7 @@ export const formValidators = {};
 
 
 // Кнопки
-export const avatarEditButton = document.querySelector('.profile__avatar_button')
+export const avatarEditButton = document.querySelector('.profile__avatar-edit')
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const cardAddButton = document.querySelector('.profile__add-button');
 
