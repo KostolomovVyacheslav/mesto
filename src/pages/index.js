@@ -39,14 +39,6 @@ function renderLoading(isLoading, currentPopup, text) {
 }
 
 
-// Информация о пользователе с сервера
-api.getUserData()
-.then(res => {
-   userProfileInfo.setUserInfo(res);
-})
-.catch(error => console.log(error));
-
-
 // Класс section
 const section = new Section({
    renderer: (item) => {
@@ -54,14 +46,6 @@ const section = new Section({
       section.addItem(cardElement);
    }
 }, cardsListSelector);
-
-// загрузка карточек с сервера
-api.getInitialCards()
-.then(res => {
-   section.renderItems(res);
-})
-.catch(error => console.log(error));
-
 
 // Попап добавления новой карточки
 const addCardPopup = new PopupWithForm({
@@ -119,6 +103,7 @@ const handleLikeIconClick = (isLiked, id, createCard) => {
    api.changeLikeStatus(isLiked, id, createCard)
    .then(res => {
       createCard.setLikesCount(res.likes.length);
+      createCard.toggleLikeButtonState();
    })
    .catch(error => {
       console.log(error);
@@ -241,13 +226,14 @@ const enableValidation = (validationConfig) => {
 enableValidation(validationConfig);
 
 
+// Общий запрос для данных профиля и карточек
 Promise.all([
    api.getUserData(), api.getInitialCards()
 ])
 .then(([userDataResult, cardsResult]) => {
-   api.getUserData(userDataResult);
-   api.getInitialCards(cardsResult);
+   userProfileInfo.setUserInfo(userDataResult);
+   section.renderItems(cardsResult);
 })
-.catch((error) => {
+.catch(error => {
    console.log(`Ошибка загрузки данных ${error}`)
 });

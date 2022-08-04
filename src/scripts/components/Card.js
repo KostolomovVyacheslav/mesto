@@ -42,16 +42,19 @@ export class Card {
          this._likeCounter.textContent = '';
       }
    }
+
+
+   toggleLikeButtonState() {
+      this._likeButton.classList.toggle('element__like-button_active');
+   }
    
 
    _subscribeToEvents() {
       this._likeButton.addEventListener('click', () => {
          if (this._likeButton.classList.contains('element__like-button_active')) {
             this._handleLikeIconClick(true, this._cardId, this);
-            this._likeButton.classList.remove('element__like-button_active');
          } else {
             this._handleLikeIconClick(false, this._cardId, this);
-            this._likeButton.classList.add('element__like-button_active');
          }
       });
 

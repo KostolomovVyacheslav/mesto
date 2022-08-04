@@ -5,6 +5,15 @@ export class Api {
    }
 
 
+   _checkResponse(res) {
+      if (res.ok) {
+         return res.json();
+      } else {
+         Promise.reject(`Ошибка загрузки данных ${res.status}`);
+      }
+   }
+
+
    getUserData() {
       return fetch(`${this._url}/users/me`, {
          method: 'GET',
@@ -12,13 +21,7 @@ export class Api {
             Authorization: `${this._headers}`
          }
       })
-      .then(res => {
-         if (res.ok) {
-            return res.json();
-         } else {
-            Promise.reject(`Ошибка загрузки данных ${res.status}`);
-         }
-      })
+      .then(this._checkResponse)
    }
 
 
@@ -29,13 +32,7 @@ export class Api {
             Authorization: `${this._headers}`
          }
       })
-      .then(res => {
-         if (res.ok) {
-            return res.json();
-         } else {
-            Promise.reject(`Ошибка загрузки данных ${res.status}`);
-         }
-      })
+      .then(this._checkResponse)
    }
 
 
@@ -51,13 +48,7 @@ export class Api {
             link: item.link
          })
       })
-      .then(res => {
-         if (res.ok) {
-            return res.json();
-         } else {
-            Promise.reject(`Ошибка загрузки данных ${res.status}`);
-         }
-      })
+      .then(this._checkResponse)
    }
 
 
@@ -68,13 +59,7 @@ export class Api {
             Authorization: 'ddb2474c-5895-4c61-a372-bb2b9d4e6bd7'
          }
       })
-      .then(res => {
-         if (res.ok) {
-            return res.json();
-         } else {
-            Promise.reject(`Ошибка загрузки данных ${res.status}`);
-         }
-      })
+      .then(this._checkResponse)
       .then(result => {
          return result._id;
       })
@@ -93,13 +78,7 @@ export class Api {
             about: userData.inputUserJob
           })
       })
-      .then(res => {
-         if (res.ok) {
-            return res.json();
-         } else {
-            Promise.reject(`Ошибка загрузки данных ${res.status}`);
-         }
-      })
+      .then(this._checkResponse)
    }
 
 
@@ -114,13 +93,7 @@ export class Api {
             avatar: avatarData.avatarLink
          })
       })
-      .then(res => {
-         if (res.ok) {
-            return res.json();
-         } else {
-            Promise.reject(`Ошибка загрузки данных ${res.status}`);
-         }
-      })
+      .then(this._checkResponse)
    }
 
 
@@ -132,13 +105,7 @@ export class Api {
             'Content-Type': 'application/json'
          }
       })
-      .then(res => {
-         if (res.ok) {
-            return res.json();
-         } else {
-            Promise.reject(`Ошибка загрузки данных ${res.status}`);
-         }
-      })
+      .then(this._checkResponse)
    }
 
 
@@ -151,13 +118,7 @@ export class Api {
                'Content-Type': 'application/json'
             }
          })
-         .then(res => {
-            if (res.ok) {
-               return res.json();
-            } else {
-               Promise.reject(`Ошибка загрузки данных ${res.status}`);
-            }
-         })
+         .then(this._checkResponse)
       } else {
          return fetch(`${this._url}/cards/${id}/likes`, {
             method: 'PUT',
@@ -166,13 +127,7 @@ export class Api {
                'Content-Type': 'application/json'
             }
          })
-         .then(res => {
-            if (res.ok) {
-               return res.json();
-            } else {
-               Promise.reject(`Ошибка загрузки данных ${res.status}`);
-            }
-         })
+         .then(this._checkResponse)
       }
    }
 }
